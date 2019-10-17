@@ -1,0 +1,18 @@
+GCC=/home/zzy/bin/gcc_sve/bin/aarch64-linux-gnu-gcc
+CFLAGS=-g -Wall -march=armv8.2-a+sve -O2
+LDFLAGS= # --static
+
+sve_build=${GCC} ${CFLAGS} -o sve_strlen sve_strlen_test.c sve_strlen.S
+sve_clean=rm sve_strlen
+
+sve_strlen: sve_strlen_test.c sve_strlen.S
+	${sve_build}
+
+.PHONY: clean done
+clean:
+	${sve_clean}
+
+done:
+	${sve_build}
+	./sve_strlen
+	${sve_clean}

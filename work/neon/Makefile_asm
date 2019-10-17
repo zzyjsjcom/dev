@@ -1,0 +1,18 @@
+GCC=/home/zzy/bin/gcc_sve/bin/aarch64-linux-gnu-gcc
+CFLAGS=-g -Wall -march=armv8.2-a -O2
+LDFLAGS= # --static
+
+neon_build=${GCC} ${CFLAGS} -o neon_add3 neon_add3_test.c neon_add3.S
+neon_clean=rm neon_add3
+
+neon_add3: neon_add3_test.c neon_add3.S
+	${neon_build}
+
+.PHONY: clean done
+clean:
+	${neon_clean}
+
+done:
+	${neon_build}
+	./neon_add3
+	${neon_clean}
