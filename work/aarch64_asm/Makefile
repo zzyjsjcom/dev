@@ -1,15 +1,14 @@
 CC=gcc
 CFLAGS=-g -Wall -O2
-LDFLAGS= # --static
-no_print=--no-print-directory
+LDFLAGS=
 
-hello: hello.S
+all: hello
 
-.PHONY: clean done
+.o:.S
+
+.PHONY: clean
 clean:
-	rm hello
+	rm -f hello *.o
 
-done:
-	@make ${no_print} hello
+run: hello
 	./hello
-	@make ${no_print} clean
